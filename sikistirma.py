@@ -55,7 +55,7 @@ def download_file(url, local_path):
     if dir_path:
         os.makedirs(dir_path, exist_ok=True)
 
-    response = requests.get(url, stream=True)
+    response = requests.get(url, stream=True, verify = False)
     response.raise_for_status()
     with open(local_path, "wb") as f:
         for chunk in response.iter_content(chunk_size=8192):

@@ -164,9 +164,8 @@ def encrypt_rsa(data_bytes, rsa_pubkey):
 
 @st.cache_resource(show_spinner=False)
 def load_vqvae_model():
-    config_url= "https://drive.google.com/file/d/1ikuE7ZfsCdgYN6fSDEDVxBRglMUmy7SS/view?usp=sharing"
-    ckpt_url = "https://drive.google.com/uc?export=download&id=1kw4VA8h6P66YJ2uo7YiGEcYQNJ_R3Rbr"
-
+    config_url = "https://drive.google.com/uc?export=download&id=1ikuE7ZfsCdgYN6fSDEDVxBRglMUmy7SS"
+    ckpt_url   = "https://drive.google.com/uc?export=download&id=1kw4VA8h6P66YJ2uo7YiGEcYQNJ_R3Rbr"
     config_local = download_file(config_url, "model.yaml")
     ckpt_local   = download_file(ckpt_url,   "last.ckpt")
 

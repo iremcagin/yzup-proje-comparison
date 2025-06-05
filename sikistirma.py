@@ -164,24 +164,12 @@ def encrypt_rsa(data_bytes, rsa_pubkey):
 
 @st.cache_resource(show_spinner=False)
 def load_vqvae_model():
-    """
-    VQGAN/VQ-VAE modelini yüklemek için:
-      1) YAML yapılandırmayı indir ve yükle.
-      2) Checkpoint (.ckpt) dosyasını indir ve state_dict yükle.
-      3) VQModel(**params) oluşturarak, ağırlıkları aktar.
-    """
-    config_url= "https://raw.githubusercontent.com/CompVis/taming-transformers/master/configs/model.yaml"
-    ckpt_url = "https://heibox.uni-heidelberg.de/f/140747ba53464f31850f/?dl=1"
-
-    #config_url = "https://heiberg-site.s3.eu-central-1.amazonaws.com/vqgan_imagenet_f8_8192.yaml"
-    #ckpt_url   = "https://heiberg-site.s3.eu-central-1.amazonaws.com/vqgan_imagenet_f8_8192.ckpt"
+    config_url= "https://drive.google.com/file/d/1ikuE7ZfsCdgYN6fSDEDVxBRglMUmy7SS/view?usp=sharing"
+    ckpt_url = "https://drive.google.com/uc?export=download&id=1kw4VA8h6P66YJ2uo7YiGEcYQNJ_R3Rbr"
 
     config_local = download_file(config_url, "model.yaml")
     ckpt_local   = download_file(ckpt_url,   "last.ckpt")
-        
-    #config_local = download_file(config_url, "models/vqgan_imagenet_f8_8192.yaml")
-    #ckpt_local   = download_file(ckpt_url,   "models/vqgan_imagenet_f8_8192.ckpt")
-    
+
     config = OmegaConf.load(config_local)
     model = VQModel(**config.model.params)
     ckpt_dict = torch.load(ckpt_local, map_location="cpu")

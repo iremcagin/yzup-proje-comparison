@@ -172,7 +172,7 @@ def load_vqvae_model():
 
     config = OmegaConf.load(config_local)
     model = VQModel(**config.model.params)
-    ckpt_dict = torch.load(ckpt_local, map_location="cpu")
+    ckpt_dict = torch.load(ckpt_local, map_location="cpu", weights_only=False)
     state_dict = ckpt_dict.get("state_dict", ckpt_dict)
     model.load_state_dict(state_dict, strict=False)
     model.eval()

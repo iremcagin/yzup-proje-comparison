@@ -46,21 +46,22 @@ COCO_SAMPLE_URLS = [
     "https://images.cocodataset.org/val2017/000000000632.jpg",
 ]
 
-def download_file(url: str, local_path: str):
-    """
-    - Eğer local_path zaten varsa, dosyayı tekrar indirme.
-    - Aksi halde URL üzerinden indir ve local_path'e kaydet.
-    """
+def download_file(url, local_path):
+    """Verilen URL'den dosyayı indirir ve local_path'e kaydeder."""
     if os.path.isfile(local_path):
         return local_path
+        
+    dir_path = os.path.dirname(local_path)
+    if dir_path:
+        os.makedirs(dir_path, exist_ok=True)
 
-    os.makedirs(os.path.dirname(local_path), exist_ok=True)
-    response = requests.get(url, stream=True, verify=False)
+    response = requests.get(url, stream=True)
     response.raise_for_status()
     with open(local_path, "wb") as f:
-        for chunk in response.iter_content(8192):
+        for chunk in response.iter_content(chunk_size=8192):
             f.write(chunk)
     return local_path
+
 
 def download_coco_images(url_list, save_dir="coco_samples"):
     os.makedirs(save_dir, exist_ok=True)
